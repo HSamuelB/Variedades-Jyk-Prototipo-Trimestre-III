@@ -46,16 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Función que devuelve el color de la barra según el total del día
+    function colorPorValor(valor) {
+        if (valor < 150000) return 'rojo';
+        if (valor < 400000) return 'amarillo';
+        return 'verde';
+    }
+
     const maxDia = Math.max(...totalesPorDia, 1);
     const grafico = document.getElementById('grafico');
     grafico.innerHTML = dias.map((dia, i) => {
         const valor = totalesPorDia[i];
         const altura = (valor / maxDia) * 100;
         const esHoy = i === (hoy.getDay() === 0 ? 6 : hoy.getDay() - 1);
+        const color = colorPorValor(valor);
         return `
             <div class="barra-wrap ${esHoy ? 'hoy' : ''}">
                 <span class="barra-valor">${formatoCOP(valor)}</span>
-                <div class="barra ${esHoy ? 'hoy' : ''}" style="height:${altura}%"></div>
+                <div class="barra barra-${color}" style="height:${altura}%"></div>
                 <span class="barra-etiqueta">${dia}</span>
             </div>
         `;

@@ -92,14 +92,18 @@
 
 .barra {
     width: 100%;
-    background: linear-gradient(180deg, #c8e6d3 0%, #a7d9b9 100%);
     border-radius: 8px 8px 0 0;
     transition: all 0.3s;
     min-height: 4px;
 }
-
-.barra.hoy {
-    background: linear-gradient(180deg, #e8bd7a 0%, #d99b3f 100%);
+.barra-rojo {
+    background: linear-gradient(180deg, #eab8b8 0%, var(--rojo) 100%);
+}
+.barra-amarillo {
+    background: linear-gradient(180deg, #edd39b 0%, var(--accent) 100%);
+}
+.barra-verde {
+    background: linear-gradient(180deg, var(--mint) 0%, var(--verde) 100%);
 }
 
 .barra-etiqueta {

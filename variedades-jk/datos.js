@@ -38,29 +38,58 @@ function generarVentasSemilla() {
     const productos = DATOS_SEMILLA.productos;
     const ventas = [];
     const hoy = new Date();
-    const cantidadesPorDia = [4, 6, 3, 7, 9, 8, 5];
+
+    // Total objetivo de ventas por día (Lun → Dom)
+    // Distribución pensada para que se vean los 3 colores del gráfico:
+    //   < 150.000       → rojo
+    //   150.000 - 400.000 → amarillo
+    //   > 400.000       → verde
+    const objetivosPorDia = [
+        380000,   // Lun → amarillo
+        95000,    // Mar → rojo
+        280000,   // Mié → amarillo
+        520000,   // Jue → verde
+        120000,   // Vie → rojo
+        610000,   // Sáb → verde
+        185000    // Dom → amarillo
+    ];
+
     let contador = 1;
 
     for (let i = 0; i < 7; i++) {
         const fecha = new Date(hoy);
         fecha.setDate(hoy.getDate() - (6 - i));
-        fecha.setHours(10 + (i % 8), 15 + i, 0, 0);
 
-        for (let j = 0; j < cantidadesPorDia[i]; j++) {
+        const objetivo = objetivosPorDia[i];
+        let acumulado = 0;
+
+        // Generar transacciones hasta alcanzar el total objetivo del día
+        while (acumulado < objetivo) {
             const prod = productos[Math.floor(Math.random() * productos.length)];
-            const cant = 1 + Math.floor(Math.random() * 2);
+            const cant = 1 + Math.floor(Math.random() * 4);   // 1 a 4 unidades
+            const subtotal = prod.precio * cant;
+
+            // Si ya casi llegamos al objetivo, paramos
+            if (acumulado > 0 && acumulado + subtotal > objetivo * 1.08) break;
+
+            const hora = 8 + Math.floor(Math.random() * 13);  // 8am a 8pm
+            const min  = Math.floor(Math.random() * 60);
+            const fechaTx = new Date(fecha);
+            fechaTx.setHours(hora, min, 0, 0);
+
             ventas.push({
                 id: 'V-' + String(contador).padStart(4, '0'),
-                fecha: fecha.toISOString(),
+                fecha: fechaTx.toISOString(),
                 productoId: prod.id,
                 productoNombre: prod.nombre,
                 cantidad: cant,
                 precioUnitario: prod.precio,
                 costoUnitario: prod.costo,
                 metodoPago: ['Efectivo', 'Nequi', 'PSE'][Math.floor(Math.random() * 3)],
-                total: prod.precio * cant
+                total: subtotal
             });
             contador++;
+            acumulado += subtotal;
         }
     }
     return ventas;
