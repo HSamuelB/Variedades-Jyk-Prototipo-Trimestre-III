@@ -8,15 +8,15 @@ const DATOS_SEMILLA = {
         { id: 2, nombre: 'Carlos López', usuario: 'Empleado', password: 'abcd', rol: 'Vendedor',        turno: 'Turno tarde'  }
     ],
     productos: [
-        { id: 'P-001', nombre: 'Arroz Diana 500g',    categoria: 'Abarrotes', precio: 3200, costo: 2400, stock: 45, stockMinimo: 10, proveedor: 'Distribuidora La Economía', imagen: '', vencimiento: '2027-03-15' },
-        { id: 'P-002', nombre: 'Coca-Cola 400ml',     categoria: 'Bebidas',   precio: 2500, costo: 1800, stock: 8,  stockMinimo: 10, proveedor: 'Bebidas Andinas',          imagen: '', vencimiento: '2026-12-01' },
-        { id: 'P-003', nombre: 'Jabón Rey 300g',      categoria: 'Aseo',      precio: 2200, costo: 1500, stock: 30, stockMinimo: 8,  proveedor: 'Aseo Total',               imagen: '', vencimiento: '2027-06-20' },
-        { id: 'P-004', nombre: 'Papas Margarita',     categoria: 'Snacks',    precio: 2000, costo: 1300, stock: 5,  stockMinimo: 10, proveedor: 'Alimentos del Valle',      imagen: '', vencimiento: '2026-11-10' },
-        { id: 'P-005', nombre: 'Leche Alquería 1L',   categoria: 'Lácteos',   precio: 4300, costo: 3200, stock: 20, stockMinimo: 8,  proveedor: 'Distribuidora La Economía', imagen: '', vencimiento: '2026-10-05' },
-        { id: 'P-006', nombre: 'Chocoramo',           categoria: 'Snacks',    precio: 1500, costo: 900,  stock: 60, stockMinimo: 15, proveedor: 'Alimentos del Valle',      imagen: '', vencimiento: '2026-12-30' },
-        { id: 'P-007', nombre: 'Queso campesino 250g',categoria: 'Lácteos',   precio: 9800, costo: 7500, stock: 12, stockMinimo: 5,  proveedor: 'Distribuidora La Economía', imagen: '', vencimiento: '2026-10-20' },
-        { id: 'P-008', nombre: 'Agua Cristal 600ml',  categoria: 'Bebidas',   precio: 1800, costo: 1100, stock: 40, stockMinimo: 12, proveedor: 'Bebidas Andinas',          imagen: '', vencimiento: '2027-01-15' },
-        { id: 'P-009', nombre: 'Detergente Fab 900g', categoria: 'Aseo',      precio: 12500,costo: 9800, stock: 3,  stockMinimo: 6,  proveedor: 'Aseo Total',               imagen: '', vencimiento: '2026-09-28' }
+        { id: 'P-001', nombre: 'Arroz Diana 500g',    categoria: 'Abarrotes', precio: 3200, costo: 2400, stock: 45, stockMinimo: 10, proveedor: 'Distribuidora La Economía', imagen: '../imgProductos/arrozDiana.jpg', vencimiento: '2027-03-15' },
+        { id: 'P-002', nombre: 'Coca-Cola 400ml',     categoria: 'Bebidas',   precio: 2500, costo: 1800, stock: 8,  stockMinimo: 10, proveedor: 'Bebidas Andinas',          imagen: '../imgProductos/cocaCola.jpg', vencimiento: '2026-12-01' },
+        { id: 'P-003', nombre: 'Jabón Rey 300g',      categoria: 'Aseo',      precio: 2200, costo: 1500, stock: 30, stockMinimo: 8,  proveedor: 'Aseo Total',               imagen: '../imgProductos/jabonRey.jpg', vencimiento: '2027-06-20' },
+        { id: 'P-004', nombre: 'Papas Margarita',     categoria: 'Snacks',    precio: 2000, costo: 1300, stock: 5,  stockMinimo: 10, proveedor: 'Alimentos del Valle',      imagen: '../imgProductos/papas.jpg', vencimiento: '2026-11-10' },
+        { id: 'P-005', nombre: 'Leche Alquería 1L',   categoria: 'Lácteos',   precio: 4300, costo: 3200, stock: 20, stockMinimo: 8,  proveedor: 'Distribuidora La Economía', imagen: '../imgProductos/lecheAlqueria.jpg', vencimiento: '2026-10-05' },
+        { id: 'P-006', nombre: 'Chocoramo',           categoria: 'Snacks',    precio: 1500, costo: 900,  stock: 60, stockMinimo: 15, proveedor: 'Alimentos del Valle',      imagen: '../imgProductos/chocorramo.jpg', vencimiento: '2026-12-30' },
+        { id: 'P-007', nombre: 'Queso campesino 250g',categoria: 'Lácteos',   precio: 9800, costo: 7500, stock: 12, stockMinimo: 5,  proveedor: 'Distribuidora La Economía', imagen: '../imgProductos/quesoCampesino.jpg', vencimiento: '2026-10-20' },
+        { id: 'P-008', nombre: 'Agua Cristal 600ml',  categoria: 'Bebidas',   precio: 1800, costo: 1100, stock: 40, stockMinimo: 12, proveedor: 'Bebidas Andinas',          imagen: '../imgProductos/aguaCristal.jpg', vencimiento: '2027-01-15' },
+        { id: 'P-009', nombre: 'Detergente Fab 900g', categoria: 'Aseo',      precio: 12500,costo: 9800, stock: 3,  stockMinimo: 6,  proveedor: 'Aseo Total',               imagen: '../imgProductos/detergenteFab.jpg', vencimiento: '2026-09-28' }
     ]
 };
 
