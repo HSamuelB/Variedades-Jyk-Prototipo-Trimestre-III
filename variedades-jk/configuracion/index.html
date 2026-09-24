@@ -52,7 +52,7 @@
             <div class="grid-config">
                 <!-- Perfil -->
                 <section class="card">
-                    <h3 class="card-titulo">👤 Mi perfil</h3>
+                    <h3 class="card-titulo"><i class="fa-solid fa-user" style="color: rgb(0, 0, 0);"></i> Mi perfil</h3>
                     <div class="form-grupo">
                         <label>Nombre completo</label>
                         <input type="text" id="cfgNombre">
@@ -65,12 +65,12 @@
                         <label>Rol</label>
                         <input type="text" id="cfgRol" disabled>
                     </div>
-                    <button class="btn btn-naranja" id="btnGuardarPerfil">💾 Guardar cambios</button>
+                    <button class="btn btn-naranja" id="btnGuardarPerfil"><i class="fa-solid fa-floppy-disk" style="color: rgb(0, 0, 0);"></i> Guardar cambios</button>
                 </section>
 
                 <!-- Seguridad -->
                 <section class="card">
-                    <h3 class="card-titulo">🔒 Cambiar contraseña</h3>
+                    <h3 class="card-titulo"><i class="fa-solid fa-lock" style="color: rgb(0, 0, 0);"></i>  Cambiar contraseña</h3>
                     <div class="form-grupo">
                         <label>Contraseña actual</label>
                         <input type="password" id="cfgPassActual">
@@ -83,12 +83,12 @@
                         <label>Confirmar nueva contraseña</label>
                         <input type="password" id="cfgPassConfirm">
                     </div>
-                    <button class="btn btn-naranja" id="btnCambiarPass">🔑 Actualizar contraseña</button>
+                    <button class="btn btn-naranja" id="btnCambiarPass"><i class="fa-solid fa-key" style="color: rgb(0, 0, 0);"></i> Actualizar contraseña</button>
                 </section>
 
                 <!-- Preferencias tienda (solo admin) -->
                 <section class="card" data-solo-admin>
-                    <h3 class="card-titulo">🏪 Datos de la tienda</h3>
+                    <h3 class="card-titulo"><i class="fa-solid fa-shop" style="color: rgb(0, 0, 0);"></i> Datos de la tienda</h3>
                     <div class="form-grupo">
                         <label>Nombre del negocio</label>
                         <input type="text" id="cfgTiendaNombre" value="Variedades J y K">
@@ -105,17 +105,17 @@
                         <label>Teléfono</label>
                         <input type="text" id="cfgTiendaTel" placeholder="Ej: 300 123 4567">
                     </div>
-                    <button class="btn btn-naranja" id="btnGuardarTienda">💾 Guardar datos de tienda</button>
+                    <button class="btn btn-naranja" id="btnGuardarTienda"><i class="fa-solid fa-floppy-disk" style="color: rgb(0, 0, 0);"></i> Guardar datos de tienda</button>
                 </section>
 
                 <!-- Zona de peligro (solo admin) -->
                 <section class="card zona-peligro" data-solo-admin>
-                    <h3 class="card-titulo">⚠️ Zona de peligro</h3>
+                    <h3 class="card-titulo"><i class="fa-solid fa-triangle-exclamation" style="color: rgb(0, 0, 0);"></i> Zona de peligro</h3>
                     <p class="texto-peligro">Estas acciones son irreversibles. Úsalas con precaución.</p>
                     <div class="peligro-acciones">
-                        <button class="btn btn-blanco" id="btnReiniciarStock">🔄 Reiniciar stock a valores semilla</button>
-                        <button class="btn btn-blanco" id="btnBorrarVentas" style="color:var(--rojo)">🗑️ Borrar historial de ventas</button>
-                        <button class="btn btn-blanco" id="btnRestaurarTodo" style="color:var(--rojo)">⚠️ Restaurar todo a valores de fábrica</button>
+                        <button class="btn btn-blanco" id="btnReiniciarStock"><i class="fa-solid fa-rotate" style="color: rgb(0, 0, 0);"></i> Reiniciar stock a valores semilla</button>
+                        <button class="btn btn-blanco" id="btnBorrarVentas" style="color:var(--rojo)"><i class="fa-solid fa-trash-can" style="color: rgb(0, 0, 0);"></i> Borrar historial de ventas</button>
+                        <button class="btn btn-blanco" id="btnRestaurarTodo" style="color:var(--rojo)"><i class="fa-solid fa-triangle-exclamation" style="color: rgb(0, 0, 0);"></i> Restaurar todo a valores de fábrica</button>
                     </div>
                 </section>
             </div>

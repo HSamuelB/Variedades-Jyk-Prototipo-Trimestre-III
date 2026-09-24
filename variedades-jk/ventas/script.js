@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pago = document.getElementById('carritoPago');
 
         if (!carrito.length) {
-            cont.innerHTML = '<p class="carrito-vacio">El carrito está vacío 🛒</p>';
+            cont.innerHTML = '<p class="carrito-vacio">El carrito está vacío <i class="fa-solid fa-cart-shopping" style="color: rgb(0, 0, 0);"></i></p>';
             pago.style.display = 'none';
         } else {
             pago.style.display = 'block';
