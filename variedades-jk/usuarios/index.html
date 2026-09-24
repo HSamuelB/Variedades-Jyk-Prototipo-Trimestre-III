@@ -6,7 +6,8 @@
     <title>Usuarios - Variedades J&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
     <link rel="stylesheet" href="../comun.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -17,13 +18,13 @@
             <div><h2>Variedades J y K</h2><p>Gestión de tienda</p></div>
         </div>
         <nav class="sidebar-nav">
-            <a href="../panel-de-control/index.html">🏠 <span>Inicio</span></a>
-            <a href="../ventas/index.html">🛒 <span>Ventas</span></a>
-            <a href="../inventario/index.html">📦 <span>Productos</span></a>
-            <a href="#" onclick="alert('Módulo próximamente');return false;">🚚 <span>Proveedores</span> <span class="badge-prox">próx.</span></a>
-            <a href="../usuarios/index.html">👥 <span>Usuarios</span></a>
-            <a href="../analisis/index.html">📈 <span>Análisis</span></a>
-            <a href="../configuracion/index.html">⚙️ <span>Configuración</span></a>
+            <a href="../panel-de-control/index.html"><i class="fa-solid fa-house fa-flip-horizontal" style="color: rgb(203, 213, 225);"></i> <span>Inicio</span></a>
+            <a href="../ventas/index.html"><i class="fa-solid fa-cart-shopping" style="color: rgb(203, 213, 225);"></i> <span>Ventas</span></a>
+            <a href="../inventario/index.html"><i class="fa-solid fa-box" style="color: rgb(203, 213, 225);"></i> <span>Productos</span></a>
+            <a href="#" onclick="alert('Módulo próximamente');return false;"><i class="fa-solid fa-truck" style="color: rgb(203, 213, 225);"></i> <span>Proveedores</span> <span class="badge-prox">próx.</span></a>
+            <a href="../usuarios/index.html" data-solo-admin><i class="fa-solid fa-users" style="color: rgb(203, 213, 225);"></i> <span>Usuarios</span></a>
+            <a href="../analisis/index.html"><i class="fa-solid fa-square-poll-vertical" style="color: rgb(203, 213, 225);"></i> <span>Análisis</span></a>
+            <a href="../configuracion/index.html"><i class="fa-solid fa-gear" style="color: rgb(203, 213, 225);"></i>    <span>Configuración</span></a>
         </nav>
         <button class="btn-cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
     </aside>
