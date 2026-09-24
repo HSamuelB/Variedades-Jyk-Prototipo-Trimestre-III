@@ -173,9 +173,9 @@
     gap: 10px;
 }
 
-.alerta-item.bajo    { background-color: var(--amarillo-bg); }
+.alerta-item.bajo    { background-color: var(--rojo-bg); }
 .alerta-item.agotado { background-color: var(--rojo-bg); }
-.alerta-item.prox    { background-color: #FEF9C3; }
+.alerta-item.prox    { background-color: var(--rojo-bg); }
 .alerta-item.vencido { background-color: var(--rojo-bg); }
 
 .alerta-item .info { flex: 1; }
