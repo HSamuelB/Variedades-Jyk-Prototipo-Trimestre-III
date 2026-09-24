@@ -185,7 +185,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setVentas(ventas);
         setProductos(productos);
 
-        alert(`✅ Venta registrada con éxito\nTotal: ${formatoCOP(total)}\nMétodo: ${metodoPago}`);
+        // Calcular cambio si fue efectivo
+        const recibido = Number(document.getElementById('recibido').value) || 0;
+        const cambio = metodoPago === 'Efectivo' ? Math.max(0, recibido - total) : 0;
+
+        // Rellenar el modal de éxito
+        document.getElementById('exitoTotal').textContent     = formatoCOP(total);
+        document.getElementById('exitoMetodo').textContent    = metodoPago;
+        document.getElementById('exitoProductos').textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
+        document.getElementById('exitoCambio').textContent    = formatoCOP(cambio);
+        document.getElementById('filaCambio').style.display   = metodoPago === 'Efectivo' ? 'flex' : 'none';
+
+        // Mostrar modal
+        document.getElementById('modalExito').classList.add('activo');
+
+        // Limpiar estado
         carrito = [];
         metodoPago = null;
         document.querySelectorAll('.metodo').forEach(b => b.classList.remove('activo'));
@@ -193,6 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('pagoEfectivo').style.display = 'none';
         pintarCarrito();
         pintarProductos();
+    });
+
+    // Botón "Nueva venta" del modal → simplemente cierra
+    document.getElementById('btnNuevaVenta').addEventListener('click', () => {
+        cerrarModal('modalExito');
     });
 
     document.getElementById('btnVaciar').addEventListener('click', () => {
@@ -205,3 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pintarProductos();
     pintarCarrito();
 });
+
+function cerrarModal(id) {
+    document.getElementById(id).classList.remove('activo');
+}
