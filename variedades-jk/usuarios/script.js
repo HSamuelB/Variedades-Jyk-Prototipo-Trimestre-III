@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('userId').value = '';
         passInput.required = true;
         modal.classList.add('activo');
+        
     });
 
     form.addEventListener('submit', (e) => {
@@ -87,15 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const idx = usuarios.findIndex(u => u.id === Number(id));
             if (!data.password) data.password = usuarios[idx].password;
             usuarios[idx] = { ...usuarios[idx], ...data };
+            showToast('¡Usuario actualizado correctamente!');
         } else {
             if (!data.password) { alert('La contraseña es obligatoria'); return; }
             usuarios.push(data);
+            showToast('¡Usuario agregado correctamente!');
         }
 
         setUsuarios(usuarios);
         cerrarModal('modalUsuario');
         pintarTabla();
-    });
+    });   
 
     window.editarUsuario = (id) => {
         const u = getUsuarios().find(x => x.id === id);
@@ -109,8 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
         passInput.required = false;
         document.getElementById('ayudaPass').style.display = 'block';
         modal.classList.add('activo');
+        
     };
-
+    
     window.eliminarUsuario = (id) => {
         const u = getUsuarios().find(x => x.id === id);
         const actual = getUsuarioActual();
@@ -121,9 +125,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!confirm('¿Eliminar este usuario?')) return;
         setUsuarios(getUsuarios().filter(x => x.id !== id));
         pintarTabla();
+        
     };
 
     pintarTabla();
 });
 
 function cerrarModal(id) { document.getElementById(id).classList.remove('activo'); }
+
+function showToast(message) {
+    const toast = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+    
+    toastMessage.textContent = message;
+    toast.classList.add('show');
+    
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}

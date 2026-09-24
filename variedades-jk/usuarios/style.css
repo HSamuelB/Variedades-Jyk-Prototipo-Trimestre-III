@@ -73,3 +73,32 @@
     margin-top: 5px;
     display: block;
 }
+
+/* Estilos para la Notificación Flotante (Toast) */
+.toast {
+    position: fixed;
+    bottom: -60px; /* Oculto inicialmente fuera de la pantalla */
+    right: 30px;
+    background-color: #c68a2e; /* Verde éxito */
+    color: white;
+    padding: 14px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    z-index: 2000;
+    transition: bottom 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+}
+
+.toast.show {
+    bottom: 30px; /* Sube a la vista */
+    opacity: 1;
+}
+
+.toast i {
+    font-size: 1.2rem;
+}
