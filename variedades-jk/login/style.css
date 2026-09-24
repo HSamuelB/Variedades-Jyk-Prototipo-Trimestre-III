@@ -35,7 +35,7 @@ body {
     background-size: cover;
     background-position: center;
     opacity: 0;
-    animation: crossFade 12s infinite;
+    animation: crossFade 15s infinite;
 }
 
 .bg-slide.active {
@@ -43,7 +43,11 @@ body {
 }
 
 .bg-slide:nth-child(2) {
-    animation-delay: 6s;
+    animation-delay: 5s;
+}
+
+.bg-slide:nth-child(3) {
+    animation-delay: 10s;
 }
 
 /* Capa oscura para dar contraste al panel */
@@ -55,9 +59,11 @@ body {
 
 /* Animación de crossfade */
 @keyframes crossFade {
-    0%, 45% { opacity: 1; }
-    50%, 95% { opacity: 0; }
-    100% { opacity: 1; }
+    0%   { opacity: 0; }      /* arranca invisible */
+    3%   { opacity: 1; }      /* fade-in rápido */
+    30%  { opacity: 1; }      /* se mantiene */
+    36%  { opacity: 0; }      /* fade-out MÁS LARGO (llega al 36%, no al 33%) */
+    100% { opacity: 0; }
 }
 
 /* 3. Panel de login flotante */
@@ -68,8 +74,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 15%;
-    padding-bottom: 3%;
 }
 
 .login-card {

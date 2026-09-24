@@ -8,11 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="bg-container">
-        <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop');"></div>
-        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2070&auto=format&fit=crop');"></div>
+        <div class="bg-slide active" style="background-image: url(img/Carrusel1.jpeg);"></div>
+        <div class="bg-slide" style="background-image: url(img/Carrusel2.jpeg);"></div>
+        <div class="bg-slide" style="background-image: url(img/Carrusel3.jpeg);"></div>
         <div class="bg-overlay"></div>
     </div>
 
@@ -20,11 +22,7 @@
         <div class="login-card">
             <div class="brand">
                 <div class="logo-container">
-                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                    </svg>
+                    <img src="img/Box.png" class="logo-icon">
                 </div>
                 <h1>Variedades J&K</h1>
                 <p class="subtitle">sistema de inventario</p>
@@ -39,7 +37,7 @@
                     <label for="password">Contraseña</label>
                     <div class="password-wrapper">
                         <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
-                        <span class="toggle-password" id="togglePassword">👁️</span>
+                        <span class="toggle-password" id="togglePassword"><i class="fa-solid fa-eye" style="color: rgb(0, 0, 0);"></i></span>
                     </div>
                 </div>
                 <button type="submit" class="btn-login">Iniciar sesión</button>

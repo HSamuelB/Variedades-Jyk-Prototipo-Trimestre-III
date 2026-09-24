@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('fechaDesde').value = hace30.toISOString().split('T')[0];
 
     function calcular() {
-        const desde = new Date(document.getElementById('fechaDesde').value);
-        const hasta = new Date(document.getElementById('fechaHasta').value);
+        const desde = new Date(document.getElementById('fechaDesde').value + 'T00:00:00');
+        const hasta = new Date(document.getElementById('fechaHasta').value + 'T23:59:59');
         hasta.setHours(23, 59, 59, 999);
 
         document.getElementById('infoRango').textContent =

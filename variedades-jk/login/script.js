@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     togglePassword.addEventListener('click', () => {
         const tipo = passwordInput.type === 'password' ? 'text' : 'password';
         passwordInput.type = tipo;
-        togglePassword.textContent = tipo === 'password' ? '👁️' : '🙈';
+        togglePassword.innerHTML = tipo === 'password' ? '<i class="fa-solid fa-eye" style="color: rgb(0, 0, 0);"></i>' : '<i class="fa-solid fa-eye-slash" style="color: rgb(0, 0, 0);"></i>';
     });
 
     // Login
