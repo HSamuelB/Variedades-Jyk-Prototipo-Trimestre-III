@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Variedades J&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../comun.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-logo">JK</div>
+            <div><h2>Variedades J y K</h2><p>Gestión de tienda</p></div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../panel-de-control/index.html">🏠 <span>Inicio</span></a>
+            <a href="../ventas/index.html">🛒 <span>Ventas</span></a>
+            <a href="../inventario/index.html">📦 <span>Productos</span></a>
+            <a href="#" onclick="alert('Módulo próximamente');return false;">🚚 <span>Proveedores</span> <span class="badge-prox">próx.</span></a>
+            <a href="../usuarios/index.html" data-solo-admin>👥 <span>Usuarios</span></a>
+            <a href="../analisis/index.html">📈 <span>Análisis</span></a>
+            <a href="../configuracion/index.html">⚙️ <span>Configuración</span></a>
+        </nav>
+        <button class="btn-cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
+    </aside>
+
+    <div class="contenido">
+        <header class="header">
+            <div class="header-busqueda"><input type="text" placeholder="Buscar en toda la tienda..."></div>
+            <div class="header-usuario">
+                <div class="avatar" id="avatarInicial">—</div>
+                <div class="info">
+                    <h4 id="nombreUsuario">—</h4>
+                    <p id="rolUsuario">—</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="page">
+            <div class="page-header">
+                <div>
+                    <h1>Configuración</h1>
+                    <p>Preferencias de tu cuenta y del sistema</p>
+                </div>
+            </div>
+
+            <div class="grid-config">
+                <!-- Perfil -->
+                <section class="card">
+                    <h3 class="card-titulo">👤 Mi perfil</h3>
+                    <div class="form-grupo">
+                        <label>Nombre completo</label>
+                        <input type="text" id="cfgNombre">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Usuario</label>
+                        <input type="text" id="cfgUsuario">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Rol</label>
+                        <input type="text" id="cfgRol" disabled>
+                    </div>
+                    <button class="btn btn-naranja" id="btnGuardarPerfil">💾 Guardar cambios</button>
+                </section>
+
+                <!-- Seguridad -->
+                <section class="card">
+                    <h3 class="card-titulo">🔒 Cambiar contraseña</h3>
+                    <div class="form-grupo">
+                        <label>Contraseña actual</label>
+                        <input type="password" id="cfgPassActual">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Nueva contraseña</label>
+                        <input type="password" id="cfgPassNueva">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Confirmar nueva contraseña</label>
+                        <input type="password" id="cfgPassConfirm">
+                    </div>
+                    <button class="btn btn-naranja" id="btnCambiarPass">🔑 Actualizar contraseña</button>
+                </section>
+
+                <!-- Preferencias tienda (solo admin) -->
+                <section class="card" data-solo-admin>
+                    <h3 class="card-titulo">🏪 Datos de la tienda</h3>
+                    <div class="form-grupo">
+                        <label>Nombre del negocio</label>
+                        <input type="text" id="cfgTiendaNombre" value="Variedades J y K">
+                    </div>
+                    <div class="form-grupo">
+                        <label>NIT / Documento</label>
+                        <input type="text" id="cfgTiendaNit" placeholder="Ej: 900.123.456-7">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Dirección</label>
+                        <input type="text" id="cfgTiendaDir" placeholder="Ej: Carrera 45 #12-34">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Teléfono</label>
+                        <input type="text" id="cfgTiendaTel" placeholder="Ej: 300 123 4567">
+                    </div>
+                    <button class="btn btn-naranja" id="btnGuardarTienda">💾 Guardar datos de tienda</button>
+                </section>
+
+                <!-- Zona de peligro (solo admin) -->
+                <section class="card zona-peligro" data-solo-admin>
+                    <h3 class="card-titulo">⚠️ Zona de peligro</h3>
+                    <p class="texto-peligro">Estas acciones son irreversibles. Úsalas con precaución.</p>
+                    <div class="peligro-acciones">
+                        <button class="btn btn-blanco" id="btnReiniciarStock">🔄 Reiniciar stock a valores semilla</button>
+                        <button class="btn btn-blanco" id="btnBorrarVentas" style="color:var(--rojo)">🗑️ Borrar historial de ventas</button>
+                        <button class="btn btn-blanco" id="btnRestaurarTodo" style="color:var(--rojo)">⚠️ Restaurar todo a valores de fábrica</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Info del sistema -->
+            <div class="info-sistema">
+                <p><strong>Variedades J&K</strong> · Sistema de inventario</p>
+                <p>Versión 1.0 · Desarrollado como prototipo frontend</p>
+                <p>Los datos se guardan localmente en tu navegador (localStorage).</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="../datos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

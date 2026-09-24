@@ -1,0 +1,223 @@
+/* 1. Reset y Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
+
+:root {
+    --primary-blue: #0f2440;   /* navy */
+    --text-dark: #1c1c1c;
+    --text-gray: #6b6b6b;
+    --border-color: #eceae4;
+    --white: #ffffff;
+    --accent: #d99b3f;
+    --mint: #a7d9b9;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background-color: #0a0a0a;
+}
+
+/* 2. Fondo de pantalla completa */
+.bg-container {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+
+.bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: crossFade 12s infinite;
+}
+
+.bg-slide.active {
+    animation-delay: 0s;
+}
+
+.bg-slide:nth-child(2) {
+    animation-delay: 6s;
+}
+
+/* Capa oscura para dar contraste al panel */
+.bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+/* Animación de crossfade */
+@keyframes crossFade {
+    0%, 45% { opacity: 1; }
+    50%, 95% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* 3. Panel de login flotante */
+.login-wrapper {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 15%;
+    padding-bottom: 3%;
+}
+
+.login-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 45px 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 25px 60px rgba(15, 36, 64, 0.25);
+    animation: floatIn 0.8s ease-out;
+}
+
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 4. Marca */
+.brand {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo-icon {
+    width: 55px;
+    height: 55px;
+    color: var(--primary-blue);
+}
+
+.brand h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+}
+
+.brand .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+/* 5. Formulario */
+.login-form {
+    width: 100%;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 13px 15px;
+    background-color: #faf8f3;
+    border: 1px solid var(--border-color);
+    border-radius: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--mint);
+    background-color: #fff;
+}
+
+.input-group input::placeholder {
+    color: #999;
+}
+
+/* Ojo de la contraseña */
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.1rem;
+    user-select: none;
+}
+
+/* Botón */
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #c68a2e;
+}
+
+.btn-login:active {
+    transform: scale(0.98);
+}
+
+/* 6. Responsive */
+@media (max-width: 768px) {
+    .login-wrapper {
+        padding-right: 0;
+        padding-bottom: 0;
+        padding: 20px;
+    }
+    .login-card {
+        padding: 35px 25px;
+        max-width: 100%;
+    }
+    .brand h1 {
+        font-size: 1.6rem;
+    }
+}

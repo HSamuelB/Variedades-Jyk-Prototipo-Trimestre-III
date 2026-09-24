@@ -1,0 +1,207 @@
+/* KPIs */
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.kpi {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: var(--radio);
+}
+
+.kpi-icono {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.kpi-texto p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+}
+
+.kpi-texto h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+/* Layout de paneles */
+.grid-panel {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.card-header h3 { font-size: 16px; }
+
+.totales { text-align: right; }
+.totales p { font-size: 12px; color: var(--texto-suave); }
+.totales h4 { font-size: 18px; color: var(--azul); margin: 2px 0; }
+
+/* Gráfico */
+.grafico {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 220px;
+    gap: 8px;
+    padding-top: 20px;
+}
+
+.barra-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.barra-valor {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--texto-suave);
+    font-weight: 600;
+}
+
+.barra {
+    width: 100%;
+    background: linear-gradient(180deg, #c8e6d3 0%, #a7d9b9 100%);
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s;
+    min-height: 4px;
+}
+
+.barra.hoy {
+    background: linear-gradient(180deg, #e8bd7a 0%, #d99b3f 100%);
+}
+
+.barra-etiqueta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--texto-suave);
+    font-weight: 500;
+}
+
+.barra-wrap.hoy .barra-etiqueta {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Tabs alertas */
+.alertas-card { display: flex; flex-direction: column; }
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--borde);
+    margin-bottom: 18px;
+}
+
+.tab {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.tab.activo {
+    color: var(--navy);
+    border-bottom-color: var(--accent);
+}
+
+.tab .contador {
+    background-color: #e05c5c;
+}
+
+.tab-panel {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.tab-panel.activo { display: flex; }
+
+/* Items de alerta */
+.alerta-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 12px;
+    gap: 10px;
+}
+
+.alerta-item.bajo    { background-color: var(--amarillo-bg); }
+.alerta-item.agotado { background-color: var(--rojo-bg); }
+.alerta-item.prox    { background-color: #FEF9C3; }
+.alerta-item.vencido { background-color: var(--rojo-bg); }
+
+.alerta-item .info { flex: 1; }
+
+.alerta-item .info h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.alerta-item .info p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--texto-suave);
+}
+
+.alerta-item .btn-mini {
+    padding: 6px 12px;
+    font-size: 12px;
+    background-color: #fff;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+}
+
+.alerta-vacio {
+    text-align: center;
+    padding: 30px;
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .grid-panel { grid-template-columns: 1fr; }
+}

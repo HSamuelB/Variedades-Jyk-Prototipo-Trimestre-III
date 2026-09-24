@@ -1,0 +1,75 @@
+/* Buscador de filtros */
+.filtros-busqueda input {
+    width: 100%;
+    max-width: 380px;
+    padding: 12px 18px;
+    background-color: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Tabla contenedor */
+.tabla-wrap {
+    background-color: var(--card);
+    border-radius: var(--radio);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.tabla-wrap .tabla {
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* Acciones de fila */
+.celda-acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    border-color: var(--mint);
+    background-color: var(--bg);
+}
+
+.icon-btn.azul { color: var(--navy); }
+.icon-btn.rojo { color: var(--rojo); }
+
+/* Input con ojo de contraseña */
+.input-pass { position: relative; }
+
+.input-pass .ojo {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 15px;
+    user-select: none;
+}
+
+/* Texto de ayuda */
+.ayuda {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--texto-suave);
+    margin-top: 5px;
+    display: block;
+}

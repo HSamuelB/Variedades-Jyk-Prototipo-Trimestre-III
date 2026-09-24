@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Variedades J&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../comun.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-logo">JK</div>
+            <div><h2>Variedades J y K</h2><p>Gestión de tienda</p></div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../panel-de-control/index.html">🏠 <span>Inicio</span></a>
+            <a href="../ventas/index.html">🛒 <span>Ventas</span></a>
+            <a href="../inventario/index.html">📦 <span>Productos</span></a>
+            <a href="#" onclick="alert('Módulo próximamente');return false;">🚚 <span>Proveedores</span> <span class="badge-prox">próx.</span></a>
+            <a href="../usuarios/index.html" data-solo-admin>👥 <span>Usuarios</span></a>
+            <a href="../analisis/index.html">📈 <span>Análisis</span></a>
+            <a href="../configuracion/index.html">⚙️ <span>Configuración</span></a>
+        </nav>
+        <button class="btn-cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
+    </aside>
+
+    <div class="contenido">
+        <header class="header">
+            <div class="header-busqueda"><input type="text" placeholder="Buscar en toda la tienda..."></div>
+            <div class="header-usuario">
+                <div class="avatar" id="avatarInicial">—</div>
+                <div class="info">
+                    <h4 id="nombreUsuario">—</h4>
+                    <p id="rolUsuario">—</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="page">
+            <div class="page-header">
+                <div>
+                    <h1>Productos</h1>
+                    <p>Catálogo, categorías y niveles de stock</p>
+                </div>
+                <div class="acciones-header">
+                    <button class="btn btn-blanco" id="btnDevolver">↩️ Devolver producto</button>
+                    <button class="btn btn-naranja" id="btnNuevo">+ Añadir producto</button>
+                </div>
+            </div>
+
+            <div class="filtros">
+                <div class="filtros-busqueda">
+                    <input type="text" id="buscarProducto" placeholder="🔍  Buscar producto...">
+                </div>
+                <div class="chips" id="chipsCategorias"></div>
+            </div>
+
+            <div class="tabla-wrap">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th data-solo-admin>Costo compra</th>
+                            <th>Stock</th>
+                            <th>Proveedor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL Producto (Nuevo / Editar) -->
+    <div class="modal-overlay" id="modalProducto">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="tituloModal">Nuevo producto</h2>
+                <button class="btn-cerrar" onclick="cerrarModal('modalProducto')">✕</button>
+            </div>
+            <form id="formProducto">
+                <input type="hidden" id="prodId">
+
+                <div class="form-grupo">
+                    <label>Nombre del producto</label>
+                    <input type="text" id="prodNombre" required placeholder="Ej: Arroz Diana 500g">
+                </div>
+
+                <div class="form-grupo">
+                    <label>Imagen del producto</label>
+                    <input type="file" id="prodImagen" accept="image/*">
+                    <small class="ayuda">Formatos: JPG, PNG. Máx 1MB.</small>
+                </div>
+
+                <div class="form-fila">
+                    <div class="form-grupo">
+                        <label>Precio venta</label>
+                        <input type="number" id="prodPrecio" required min="0" placeholder="3200">
+                    </div>
+                    <div class="form-grupo" data-solo-admin>
+                        <label>Costo compra</label>
+                        <input type="number" id="prodCosto" min="0" placeholder="2400">
+                    </div>
+                </div>
+
+                <div class="form-fila">
+                    <div class="form-grupo">
+                        <label>Stock actual</label>
+                        <input type="number" id="prodStock" required min="0" placeholder="45">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Stock mínimo</label>
+                        <input type="number" id="prodStockMin" required min="0" placeholder="10">
+                    </div>
+                </div>
+
+                <div class="form-fila">
+                    <div class="form-grupo">
+                        <label>Categoría</label>
+                        <select id="prodCategoria">
+                            <option>Abarrotes</option>
+                            <option>Bebidas</option>
+                            <option>Snacks</option>
+                            <option>Lácteos</option>
+                            <option>Aseo</option>
+                            <option>Papelería</option>
+                        </select>
+                    </div>
+                    <div class="form-grupo">
+                        <label>Vencimiento</label>
+                        <input type="date" id="prodVencimiento">
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Proveedor</label>
+                    <select id="prodProveedor">
+                        <option>Distribuidora La Economía</option>
+                        <option>Bebidas Andinas</option>
+                        <option>Aseo Total</option>
+                        <option>Alimentos del Valle</option>
+                    </select>
+                </div>
+
+                <div class="form-acciones">
+                    <button type="button" class="btn btn-blanco" onclick="cerrarModal('modalProducto')">Cancelar</button>
+                    <button type="submit" class="btn btn-naranja">💾 Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL Devolución -->
+    <div class="modal-overlay" id="modalDevolucion">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Registrar devolución</h2>
+                <button class="btn-cerrar" onclick="cerrarModal('modalDevolucion')">✕</button>
+            </div>
+            <form id="formDevolucion">
+                <div class="form-grupo">
+                    <label>Producto</label>
+                    <select id="devProducto"></select>
+                </div>
+                <div class="form-fila">
+                    <div class="form-grupo">
+                        <label>Cantidad devuelta</label>
+                        <input type="number" id="devCantidad" required min="1" value="1">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Motivo</label>
+                        <select id="devMotivo">
+                            <option>Producto vencido</option>
+                            <option>Producto dañado</option>
+                            <option>Devolución del cliente</option>
+                            <option>Error de pedido</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="ayuda-dev">La cantidad será restada del stock actual del producto.</p>
+                <div class="form-acciones">
+                    <button type="button" class="btn btn-blanco" onclick="cerrarModal('modalDevolucion')">Cancelar</button>
+                    <button type="submit" class="btn btn-naranja">↩️ Registrar devolución</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../datos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

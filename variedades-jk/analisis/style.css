@@ -1,0 +1,83 @@
+/* Rango de fechas */
+.rango-fechas {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.rango-fechas .form-grupo { min-width: 200px; }
+
+/* Banner empresa */
+.banner-empresa {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--mint);
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin-bottom: 25px;
+}
+
+.banner-empresa h3 {
+    font-family: 'Fraunces', serif;
+    color: var(--navy);
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.banner-empresa p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+/* Grid análisis */
+.grid-analisis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.titulo-seccion {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Tabla mini */
+.tabla-mini {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-mini th {
+    text-align: left;
+    padding: 10px 12px;
+    background-color: #faf8f3;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.tabla-mini td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+}
+
+.tabla-mini tr:last-child td { border-bottom: none; }
+
+.tabla-mini .codigo {
+    color: var(--ink-soft);
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+.tabla-wrap { background-color: transparent; }
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .grid-analisis { grid-template-columns: 1fr; }
+}
