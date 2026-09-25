@@ -153,9 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.eliminarProducto = (id) => {
-        if (!confirm('¿Seguro que quieres eliminar este producto?')) return;
-        setProductos(getProductos().filter(p => p.id !== id));
-        pintarTabla();
+        const prod = getProductos().find(p => p.id === id);
+        if (!prod) return;
+        mostrarConfirmacion(
+            '¿Eliminar producto?',
+            `Se eliminará "${prod.nombre}" del catálogo. Esta acción no se puede deshacer.`,
+            () => {
+                setProductos(getProductos().filter(p => p.id !== id));
+                pintarTabla();
+            }
+        );
     };
 
     // ==================== Modal Devolución ====================

@@ -118,20 +118,27 @@ document.addEventListener('DOMContentLoaded', () => {
     window.eliminarUsuario = (id) => {
         const u = getUsuarios().find(x => x.id === id);
         const actual = getUsuarioActual();
-        if (u && actual && u.usuario === actual.usuario) {
-            alert('No puedes eliminar tu propio usuario');
+        if (!u) return;
+
+        // No puede eliminarse a sí mismo → modal de aviso
+        if (actual && u.usuario === actual.usuario) {
+            mostrarAviso(
+                'No puedes eliminarte',
+                'No es posible eliminar tu propio usuario mientras estás logueada en él. Pídele a otra administradora que lo haga.'
+            );
             return;
         }
-        if (!confirm('¿Eliminar este usuario?')) return;
-        setUsuarios(getUsuarios().filter(x => x.id !== id));
-        pintarTabla();
-        
+
+        mostrarConfirmacion(
+            '¿Eliminar usuario?',
+            `Se eliminará la cuenta de "${u.nombre}". Esta acción no se puede deshacer.`,
+            () => {
+                setUsuarios(getUsuarios().filter(x => x.id !== id));
+                pintarTabla();
+            }
+        );
     };
-
-    pintarTabla();
 });
-
-function cerrarModal(id) { document.getElementById(id).classList.remove('activo'); }
 
 function showToast(message) {
     const toast = document.getElementById('toastNotification');

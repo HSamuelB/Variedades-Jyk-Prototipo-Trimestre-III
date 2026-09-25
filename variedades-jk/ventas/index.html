@@ -88,35 +88,17 @@
         </main>
     </div>
 
-    <!-- MODAL Confirmación de venta -->
-    <div class="modal-overlay" id="modalExito">
-        <div class="modal modal-exito">
-            <div class="exito-icono">✓</div>
-            <h2 class="exito-titulo">¡Venta registrada!</h2>
-            <p class="exito-subtitulo">El pedido se guardó correctamente</p>
 
-            <div class="exito-detalle">
-                <div class="exito-fila">
-                    <span>Total</span>
-                    <strong id="exitoTotal">$0</strong>
-                </div>
-                <div class="exito-fila">
-                    <span>Método de pago</span>
-                    <strong id="exitoMetodo">—</strong>
-                </div>
-                <div class="exito-fila" id="filaCambio" style="display:none">
-                    <span>Cambio entregado</span>
-                    <strong id="exitoCambio" style="color:var(--verde)">$0</strong>
-                </div>
-                <div class="exito-fila">
-                    <span>Productos</span>
-                    <strong id="exitoProductos">0</strong>
-                </div>
-            </div>
+    <!-- MODAL Confirmación (vaciar carrito, etc.) -->
+    <div class="modal-overlay" id="modalConfirmar">
+        <div class="modal modal-confirmar">
+            <div class="confirmar-icono" id="confirmarIcono">🗑️</div>
+            <h2 class="confirmar-titulo" id="confirmarTitulo">¿Estás segura?</h2>
+            <p class="confirmar-mensaje" id="confirmarMensaje">Esta acción no se puede deshacer.</p>
 
             <div class="form-acciones">
-                <button type="button" class="btn btn-blanco" onclick="cerrarModal('modalExito')">Cerrar</button>
-                <button type="button" class="btn btn-naranja" id="btnNuevaVenta">+ Nueva venta</button>
+                <button type="button" class="btn btn-blanco" onclick="cerrarModal('modalConfirmar')">Cancelar</button>
+                <button type="button" class="btn btn-naranja" id="btnConfirmarAccion">Sí, continuar</button>
             </div>
         </div>
     </div>

@@ -68,7 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const enCarrito = carrito.find(i => i.id === id);
         if (enCarrito) {
-            if (enCarrito.cantidad >= prod.stock) { alert('No hay más stock disponible'); return; }
+            if (enCarrito.cantidad >= prod.stock) {
+                mostrarAviso(
+                    'Stock insuficiente',
+                    `Solo hay ${prod.stock} unidades disponibles de "${prod.nombre}".`
+                );
+                return;
+            }
             enCarrito.cantidad++;
         } else {
             carrito.push({ id: prod.id, nombre: prod.nombre, precio: prod.precio, cantidad: 1 });
@@ -111,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         calcularCambio();
     }
 
-    window.quitarDelCarrito = (id) => {
+        window.quitarDelCarrito = (id) => {
         carrito = carrito.filter(i => i.id !== id);
         pintarCarrito();
     };
@@ -122,7 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const prod = getProductos().find(p => p.id === id);
         const nueva = item.cantidad + delta;
         if (nueva <= 0) { quitarDelCarrito(id); return; }
-        if (prod && nueva > prod.stock) { alert('No hay más stock disponible'); return; }
+        if (prod && nueva > prod.stock) {
+            mostrarAviso(
+                'Stock insuficiente',
+                `Solo hay ${prod.stock} unidades disponibles de "${prod.nombre}".`
+            );
+            return;
+        }
         item.cantidad = nueva;
         pintarCarrito();
     };
@@ -148,13 +160,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Finalizar venta
     document.getElementById('btnFinalizar').addEventListener('click', () => {
-        if (!carrito.length) { alert('El carrito está vacío'); return; }
-        if (!metodoPago) { alert('Selecciona un método de pago'); return; }
+        // Validación 1: carrito vacío
+        if (!carrito.length) {
+            mostrarAviso(
+                'Carrito vacío',
+                'Agrega al menos un producto antes de finalizar la venta.'
+            );
+            return;
+        }
+
+        // Validación 2: sin método de pago
+        if (!metodoPago) {
+            mostrarAviso(
+                'Falta el método de pago',
+                'Selecciona cómo pagará el cliente: Efectivo, Nequi o PSE.'
+            );
+            return;
+        }
 
         const total = carrito.reduce((s, i) => s + i.precio * i.cantidad, 0);
+
+        // Validación 3: efectivo insuficiente
         if (metodoPago === 'Efectivo') {
             const recibido = Number(document.getElementById('recibido').value) || 0;
-            if (recibido < total) { alert('El efectivo recibido es menor al total'); return; }
+            if (recibido < total) {
+                mostrarAviso(
+                    'Efectivo insuficiente',
+                    'El monto recibido no cubre el total de la venta. Ajusta el valor e inténtalo de nuevo.',
+                    {
+                        total,
+                        recibido,
+                        falta: total - recibido
+                    }
+                );
+                return;
+            }
         }
 
         // Guardar venta
@@ -189,15 +229,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const recibido = Number(document.getElementById('recibido').value) || 0;
         const cambio = metodoPago === 'Efectivo' ? Math.max(0, recibido - total) : 0;
 
-        // Rellenar el modal de éxito
-        document.getElementById('exitoTotal').textContent     = formatoCOP(total);
-        document.getElementById('exitoMetodo').textContent    = metodoPago;
-        document.getElementById('exitoProductos').textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
-        document.getElementById('exitoCambio').textContent    = formatoCOP(cambio);
-        document.getElementById('filaCambio').style.display   = metodoPago === 'Efectivo' ? 'flex' : 'none';
+        // Armar el detalle para el modal de éxito
+        const detalleExito = [
+            { label: 'Total', valor: formatoCOP(total), color: 'var(--accent)' },
+            { label: 'Método de pago', valor: metodoPago },
+            { label: 'Productos', valor: carrito.reduce((s, i) => s + i.cantidad, 0) }
+        ];
+        if (metodoPago === 'Efectivo') {
+            detalleExito.push({ label: 'Cambio entregado', valor: formatoCOP(cambio), color: 'var(--verde)' });
+        }
 
-        // Mostrar modal
-        document.getElementById('modalExito').classList.add('activo');
+        mostrarExito({
+            titulo: '¡Venta registrada!',
+            subtitulo: 'El pedido se guardó correctamente',
+            detalle: detalleExito,
+            accion: {
+                texto: '+ Nueva venta',
+                callback: () => { /* El carrito ya está vacío */ }
+            }
+        });
 
         // Limpiar estado
         carrito = [];
@@ -209,22 +259,19 @@ document.addEventListener('DOMContentLoaded', () => {
         pintarProductos();
     });
 
-    // Botón "Nueva venta" del modal → simplemente cierra
-    document.getElementById('btnNuevaVenta').addEventListener('click', () => {
-        cerrarModal('modalExito');
-    });
-
     document.getElementById('btnVaciar').addEventListener('click', () => {
         if (!carrito.length) return;
-        if (!confirm('¿Vaciar el carrito?')) return;
-        carrito = [];
-        pintarCarrito();
+        mostrarConfirmacion(
+            '¿Vaciar el carrito?',
+            'Se quitarán todos los productos del carrito. Esta acción no se puede deshacer.',
+            () => {
+                carrito = [];
+                pintarCarrito();
+            }
+        );
     });
 
     pintarProductos();
     pintarCarrito();
 });
 
-function cerrarModal(id) {
-    document.getElementById(id).classList.remove('activo');
-}

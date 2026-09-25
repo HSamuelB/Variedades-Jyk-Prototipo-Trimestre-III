@@ -152,3 +152,164 @@ function aplicarPermisos() {
 
 /* --- Inicializar al cargar cualquier página --- */
 inicializarDatos();
+
+/* ============================================================
+   MODALES GLOBALES (éxito, aviso, confirmación)
+   Se inyectan dinámicamente en el <body> cuando carga la página
+   ============================================================ */
+
+function inyectarModales() {
+    if (document.getElementById('modalAviso')) return; // ya existen
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
+        <!-- MODAL Éxito -->
+        <div class="modal-overlay" id="modalExito">
+            <div class="modal modal-exito">
+                <div class="exito-icono">✓</div>
+                <h2 class="exito-titulo" id="exitoTitulo">¡Listo!</h2>
+                <p class="exito-subtitulo" id="exitoSubtitulo">La operación se completó correctamente</p>
+                <div class="exito-detalle" id="exitoDetalle"></div>
+                <div class="form-acciones">
+                    <button type="button" class="btn btn-blanco" onclick="cerrarModal('modalExito')">Cerrar</button>
+                    <button type="button" class="btn btn-naranja" id="btnExitoAccion" style="display:none">Continuar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL Aviso -->
+        <div class="modal-overlay" id="modalAviso">
+            <div class="modal modal-aviso">
+                <div class="aviso-icono" id="avisoIcono">⚠️</div>
+                <h2 class="aviso-titulo" id="avisoTitulo">Atención</h2>
+                <p class="aviso-mensaje" id="avisoMensaje">Mensaje</p>
+                <div class="aviso-detalle" id="avisoDetalle" style="display:none">
+                    <div class="aviso-fila"><span>Total</span><strong id="avisoTotal">$0</strong></div>
+                    <div class="aviso-fila"><span>Efectivo recibido</span><strong id="avisoRecibido">$0</strong></div>
+                    <div class="aviso-fila aviso-falta"><span>Falta por cubrir</span><strong id="avisoFalta">$0</strong></div>
+                </div>
+                <div class="form-acciones">
+                    <button type="button" class="btn btn-naranja btn-full" onclick="cerrarModal('modalAviso')">Entendido</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL Confirmación -->
+        <div class="modal-overlay" id="modalConfirmar">
+            <div class="modal modal-confirmar">
+                <div class="confirmar-icono" id="confirmarIcono">🗑️</div>
+                <h2 class="confirmar-titulo" id="confirmarTitulo">¿Estás segura?</h2>
+                <p class="confirmar-mensaje" id="confirmarMensaje">Esta acción no se puede deshacer.</p>
+                <div class="form-acciones">
+                    <button type="button" class="btn btn-blanco" onclick="cerrarModal('modalConfirmar')">Cancelar</button>
+                    <button type="button" class="btn btn-naranja" id="btnConfirmarAccion">Sí, continuar</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(wrapper);
+}
+
+/* ============================================================
+   FUNCIONES GLOBALES DE MODALES
+   ============================================================ */
+
+function cerrarModal(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('activo');
+}
+
+/**
+ * Modal de éxito
+ * @param {object} opciones
+ * @param {string} opciones.titulo      - Título principal
+ * @param {string} opciones.subtitulo   - Texto descriptivo
+ * @param {Array}  opciones.detalle     - [{label, valor, color?}]
+ * @param {object} opciones.accion      - { texto, callback } (opcional)
+ */
+function mostrarExito({ titulo = '¡Listo!', subtitulo = '', detalle = [], accion = null } = {}) {
+    document.getElementById('exitoTitulo').textContent    = titulo;
+    document.getElementById('exitoSubtitulo').textContent = subtitulo;
+
+    const contDetalle = document.getElementById('exitoDetalle');
+    if (detalle.length) {
+        contDetalle.innerHTML = detalle.map(f => `
+            <div class="exito-fila">
+                <span>${f.label}</span>
+                <strong style="${f.color ? `color:${f.color}` : ''}">${f.valor}</strong>
+            </div>
+        `).join('');
+        contDetalle.style.display = 'block';
+    } else {
+        contDetalle.style.display = 'none';
+    }
+
+    const btnAccion = document.getElementById('btnExitoAccion');
+    const btnNuevo  = btnAccion.cloneNode(true);
+    btnAccion.parentNode.replaceChild(btnNuevo, btnAccion);
+
+    if (accion && typeof accion.callback === 'function') {
+        btnNuevo.textContent = accion.texto || 'Continuar';
+        btnNuevo.style.display = 'inline-flex';
+        btnNuevo.addEventListener('click', () => {
+            cerrarModal('modalExito');
+            accion.callback();
+        });
+    } else {
+        btnNuevo.style.display = 'none';
+    }
+
+    document.getElementById('modalExito').classList.add('activo');
+}
+
+/**
+ * Modal de aviso (informativo)
+ * @param {string} titulo
+ * @param {string} mensaje
+ * @param {object} detalle - { total, recibido, falta } (opcional)
+ */
+function mostrarAviso(titulo, mensaje, detalle = null) {
+    document.getElementById('avisoTitulo').textContent  = titulo;
+    document.getElementById('avisoMensaje').textContent = mensaje;
+
+    const contDetalle = document.getElementById('avisoDetalle');
+    if (detalle) {
+        document.getElementById('avisoTotal').textContent    = formatoCOP(detalle.total);
+        document.getElementById('avisoRecibido').textContent = formatoCOP(detalle.recibido);
+        document.getElementById('avisoFalta').textContent    = formatoCOP(detalle.falta);
+        contDetalle.style.display = 'block';
+    } else {
+        contDetalle.style.display = 'none';
+    }
+
+    document.getElementById('modalAviso').classList.add('activo');
+}
+
+/**
+ * Modal de confirmación con 2 botones
+ * @param {string}   titulo
+ * @param {string}   mensaje
+ * @param {function} onConfirm - callback al aceptar
+ */
+function mostrarConfirmacion(titulo, mensaje, onConfirm) {
+    document.getElementById('confirmarTitulo').textContent  = titulo;
+    document.getElementById('confirmarMensaje').textContent = mensaje;
+
+    const btnConfirmar = document.getElementById('btnConfirmarAccion');
+    const nuevoBtn = btnConfirmar.cloneNode(true);
+    btnConfirmar.parentNode.replaceChild(nuevoBtn, btnConfirmar);
+
+    nuevoBtn.addEventListener('click', () => {
+        cerrarModal('modalConfirmar');
+        if (typeof onConfirm === 'function') onConfirm();
+    });
+
+    document.getElementById('modalConfirmar').classList.add('activo');
+}
+
+/* --- Inyectar los modales al cargar el body --- */
+if (document.body) {
+    inyectarModales();
+} else {
+    document.addEventListener('DOMContentLoaded', inyectarModales);
+}
