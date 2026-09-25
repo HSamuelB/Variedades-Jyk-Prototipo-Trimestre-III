@@ -94,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
         htmlStock += `
             <div class="alerta-item agotado">
                 <div class="info"><h4>${p.nombre}</h4><p>Agotado</p></div>
-                <button class="btn-mini" onclick="location.href='../inventario/index.html'">Ver</button>
+                <button class="btn-mini" onclick="irASugerido('${p.proveedor.replace(/'/g, "\\'")}')">Ver</button>
             </div>`;
     });
     stockBajo.forEach(p => {
         htmlStock += `
             <div class="alerta-item bajo">
                 <div class="info"><h4>${p.nombre}</h4><p>${p.stock} unidades restantes</p></div>
-                <button class="btn-mini" onclick="location.href='../inventario/index.html'">Ver</button>
+                <button class="btn-mini" onclick="irASugerido('${p.proveedor.replace(/'/g, "\\'")}')">Ver</button>
             </div>`;
     });
     panelStock.innerHTML = htmlStock || '<p class="alerta-vacio">✅ Sin alertas de stock</p>';
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         htmlVenc += `
             <div class="alerta-item ${clase}">
                 <div class="info"><h4>${p.nombre}</h4><p>${txt}</p></div>
-                <button class="btn-mini" onclick="location.href='../inventario/index.html'">Ver</button>
+                <button class="btn-mini" onclick="irASugerido('${p.proveedor.replace(/'/g, "\\'")}')">Ver</button>
             </div>`;
     });
     panelVenc.innerHTML = htmlVenc || '<p class="alerta-vacio">✅ Sin vencimientos próximos</p>';
@@ -131,3 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+window.irASugerido = (proveedor) => {
+    window.location.href = '../proveedores/index.html?sugerido=' + encodeURIComponent(proveedor);
+};

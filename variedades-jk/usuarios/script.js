@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let busqueda = '';
 
+    pintarTabla()
+
     document.getElementById('buscarUsuario').addEventListener('input', (e) => {
         busqueda = e.target.value.toLowerCase();
         pintarTabla();

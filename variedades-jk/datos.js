@@ -17,6 +17,47 @@ const DATOS_SEMILLA = {
         { id: 'P-007', nombre: 'Queso campesino 250g',categoria: 'Lácteos',   precio: 9800, costo: 7500, stock: 12, stockMinimo: 5,  proveedor: 'Distribuidora La Economía', imagen: '../imgProductos/quesoCampesino.jpg', vencimiento: '2026-10-20' },
         { id: 'P-008', nombre: 'Agua Cristal 600ml',  categoria: 'Bebidas',   precio: 1800, costo: 1100, stock: 40, stockMinimo: 12, proveedor: 'Bebidas Andinas',          imagen: '../imgProductos/aguaCristal.jpg', vencimiento: '2027-01-15' },
         { id: 'P-009', nombre: 'Detergente Fab 900g', categoria: 'Aseo',      precio: 12500,costo: 9800, stock: 3,  stockMinimo: 6,  proveedor: 'Aseo Total',               imagen: '../imgProductos/detergenteFab.jpg', vencimiento: '2026-09-28' }
+    ],
+
+        proveedores: [
+        { id: 1, nombre: 'Distribuidora La Economía', contacto: 'Luis Pérez',   telefono: '300 123 4567', categorias: ['Abarrotes', 'Lácteos', 'Papelería'] },
+        { id: 2, nombre: 'Bebidas Andinas',           contacto: 'Marcela Ruiz',  telefono: '300 987 6543', categorias: ['Bebidas'] },
+        { id: 3, nombre: 'Alimentos del Valle',       contacto: 'Jorge Salas',   telefono: '301 222 3344', categorias: ['Snacks'] },
+        { id: 4, nombre: 'Aseo Total',                contacto: 'Diana Gómez',   telefono: '302 555 6677', categorias: ['Aseo'] }
+    ],
+    sugeridos: [
+        {
+            id: 'S-001',
+            proveedor: 'Bebidas Andinas',
+            fecha: new Date(Date.now() - 2 * 86400000).toISOString(),
+            items: [
+                { productoId: 'P-002', cantidad: 30 },
+                { productoId: 'P-008', cantidad: 40 }
+            ],
+            estado: 'esperando'
+        }
+    ],
+    ingresos: [
+        {
+            id: 'I-001',
+            proveedor: 'Aseo Total',
+            fecha: new Date(Date.now() - 4 * 86400000).toISOString(),
+            items: [
+                { productoId: 'P-003', cantidad: 25 },
+                { productoId: 'P-009', cantidad: 20 }
+            ],
+            totalUnidades: 45
+        },
+        {
+            id: 'I-002',
+            proveedor: 'Alimentos del Valle',
+            fecha: new Date(Date.now() - 6 * 86400000).toISOString(),
+            items: [
+                { productoId: 'P-006', cantidad: 60 }
+            ],
+            totalUnidades: 60,
+            ingresoLibre: true
+        }
     ]
 };
 
@@ -31,6 +72,9 @@ function inicializarDatos() {
     if (!localStorage.getItem('jk_ventas')) {
         localStorage.setItem('jk_ventas', JSON.stringify(generarVentasSemilla()));
     }
+    if (!localStorage.getItem('jk_proveedores')) localStorage.setItem('jk_proveedores', JSON.stringify(DATOS_SEMILLA.proveedores));
+    if (!localStorage.getItem('jk_sugeridos'))   localStorage.setItem('jk_sugeridos',   JSON.stringify(DATOS_SEMILLA.sugeridos));
+    if (!localStorage.getItem('jk_ingresos'))    localStorage.setItem('jk_ingresos',    JSON.stringify(DATOS_SEMILLA.ingresos));
 }
 
 /* --- Generador de ventas de los últimos 7 días (para que el dashboard tenga datos) --- */
@@ -104,6 +148,15 @@ const setUsuarios      = (arr) => localStorage.setItem('jk_usuarios', JSON.strin
 
 const getVentas        = () => JSON.parse(localStorage.getItem('jk_ventas')) || [];
 const setVentas        = (arr) => localStorage.setItem('jk_ventas', JSON.stringify(arr));
+
+const getProveedores = () => JSON.parse(localStorage.getItem('jk_proveedores')) || [];
+const setProveedores = (arr) => localStorage.setItem('jk_proveedores', JSON.stringify(arr));
+
+const getSugeridos = () => JSON.parse(localStorage.getItem('jk_sugeridos')) || [];
+const setSugeridos = (arr) => localStorage.setItem('jk_sugeridos', JSON.stringify(arr));
+
+const getIngresos = () => JSON.parse(localStorage.getItem('jk_ingresos')) || [];
+const setIngresos = (arr) => localStorage.setItem('jk_ingresos', JSON.stringify(arr));
 
 /* --- Sesión --- */
 const getUsuarioActual = () => JSON.parse(localStorage.getItem('jk_usuario_actual')) || null;
